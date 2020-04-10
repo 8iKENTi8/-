@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MySql.Data.MySqlClient;
+using Word = Microsoft.Office.Interop.Word;
+
+
 
 namespace Практика
 {
@@ -29,8 +32,41 @@ namespace Практика
 
         private void xuiButton1_Click(object sender, EventArgs e)
         {
-           // if(dataGridView1.Rows.Count>0)
+            
 
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
+            connection.Open();
+            MySqlCommand com = new MySqlCommand("SELECT * FROM `клиент`", connection);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            adapter.Fill(ds);
+
+
+
+            string row = (ds.Rows.Count ).ToString();
+            int row1 = Convert.ToInt32(row);
+            string col = (ds.Columns.Count ).ToString();
+            int col1 = Convert.ToInt32(col);
+
+            Word.Application application = new Word.Application();
+            Object missing = Type.Missing;
+            application.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+            Word.Document document = application.ActiveDocument;
+            Word.Range range = application.Selection.Range;
+            Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
+            Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+            document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
+            for (int i = 0; i < row1; i++)
+                for (int j = 0; j < col1; j++)
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i][j].ToString();
+            application.Visible = true;
+        }
+
+        private void xuiButton2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Main form2 = new Main();
+            form2.Show();
         }
     }
 }

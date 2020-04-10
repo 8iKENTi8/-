@@ -20,7 +20,10 @@ namespace Практика
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            Main someForm = (Main)this.Parent;
+            someForm.Hide();
+            Таблица_Договор form2 = new Таблица_Договор();
+            form2.Show();
         }
 
         //Таблицы клиент
