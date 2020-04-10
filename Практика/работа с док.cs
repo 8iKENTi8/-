@@ -19,7 +19,10 @@ namespace Практика
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Main someForm = (Main)this.Parent;
+            someForm.Hide();
+            Готовые_отчеты form2 = new Готовые_отчеты();
+            form2.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

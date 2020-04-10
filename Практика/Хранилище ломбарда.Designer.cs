@@ -50,6 +50,8 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(173, 52);
             this.textBox5.TabIndex = 41;
+            this.textBox5.Enter += new System.EventHandler(this.textBox5_Enter);
+            this.textBox5.Leave += new System.EventHandler(this.textBox5_Leave);
             // 
             // button9
             // 
@@ -68,6 +70,7 @@
             this.button9.TabIndex = 40;
             this.button9.Text = "Поиск";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -168,6 +171,7 @@
             this.button3.TabIndex = 32;
             this.button3.Text = ">>";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -186,6 +190,7 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "<";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -204,6 +209,7 @@
             this.button1.TabIndex = 30;
             this.button1.Text = ">";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button4
             // 
@@ -222,6 +228,7 @@
             this.button4.TabIndex = 29;
             this.button4.Text = "<<";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox2
             // 

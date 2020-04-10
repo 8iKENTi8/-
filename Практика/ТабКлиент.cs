@@ -295,10 +295,33 @@ namespace Практика
             db.closeConnection();
         }
 
+        //Проверка поиска
+        public Boolean logincheck_c_u1()
+        {
+            DB db = new DB();
+
+            DataTable dt = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `клиент` WHERE `ID_C` = @ul ", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox5.Text;
+
+
+            adapter.SelectCommand = command;
+            adapter.Fill(dt);
+
+
+
+            if (dt.Rows.Count == 0) { MessageBox.Show("Такого логина нет"); return true; }
+            else
+                return false;
+        }
+
         //Кнопка поиск
         private void button9_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "ID-КЛИЕНТА") { MessageBox.Show("Введите ID - КЛИЕНТА"); textBox1.Focus(); return; }
+            if (textBox5.Text == "ID-КЛИЕНТА") { MessageBox.Show("Введите ID - КЛИЕНТА"); textBox5.Focus(); return; }
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
@@ -306,6 +329,8 @@ namespace Практика
             MySqlDataAdapter adapter = new MySqlDataAdapter(com);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
+            if (logincheck_c_u1())
+                return;
 
             int i, j;
             string k, k1;
@@ -331,9 +356,6 @@ namespace Практика
                 }
             }
 
-            
-
-            
         }
 
         //кнопка в начало
