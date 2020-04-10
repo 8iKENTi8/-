@@ -36,10 +36,10 @@
             this.Delete = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.end = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.next = new System.Windows.Forms.Button();
+            this.begin = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -71,6 +71,7 @@
             this.button9.TabIndex = 40;
             this.button9.Text = "Поиск";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -149,6 +150,7 @@
             this.button6.TabIndex = 34;
             this.button6.Text = "Обновить";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -169,23 +171,24 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button3
+            // end
             // 
-            this.button3.BackColor = System.Drawing.Color.DarkSalmon;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(368, 195);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(45, 52);
-            this.button3.TabIndex = 32;
-            this.button3.Text = ">>";
-            this.button3.UseVisualStyleBackColor = false;
+            this.end.BackColor = System.Drawing.Color.DarkSalmon;
+            this.end.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.end.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.end.FlatAppearance.BorderSize = 0;
+            this.end.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
+            this.end.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.end.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.end.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.end.ForeColor = System.Drawing.Color.Black;
+            this.end.Location = new System.Drawing.Point(368, 195);
+            this.end.Name = "end";
+            this.end.Size = new System.Drawing.Size(45, 52);
+            this.end.TabIndex = 32;
+            this.end.Text = ">>";
+            this.end.UseVisualStyleBackColor = false;
+            this.end.Click += new System.EventHandler(this.end_Click);
             // 
             // button2
             // 
@@ -204,43 +207,45 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "<";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // next
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkSalmon;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(240, 195);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 52);
-            this.button1.TabIndex = 30;
-            this.button1.Text = ">";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.next.BackColor = System.Drawing.Color.DarkSalmon;
+            this.next.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.next.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.next.FlatAppearance.BorderSize = 0;
+            this.next.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
+            this.next.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.next.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.next.ForeColor = System.Drawing.Color.Black;
+            this.next.Location = new System.Drawing.Point(240, 195);
+            this.next.Name = "next";
+            this.next.Size = new System.Drawing.Size(45, 52);
+            this.next.TabIndex = 30;
+            this.next.Text = ">";
+            this.next.UseVisualStyleBackColor = false;
+            this.next.Click += new System.EventHandler(this.next_Click);
             // 
-            // button4
+            // begin
             // 
-            this.button4.BackColor = System.Drawing.Color.DarkSalmon;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(23, 195);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(45, 52);
-            this.button4.TabIndex = 29;
-            this.button4.Text = "<<";
-            this.button4.UseVisualStyleBackColor = false;
+            this.begin.BackColor = System.Drawing.Color.DarkSalmon;
+            this.begin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.begin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.begin.FlatAppearance.BorderSize = 0;
+            this.begin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
+            this.begin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
+            this.begin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.begin.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.begin.ForeColor = System.Drawing.Color.Black;
+            this.begin.Location = new System.Drawing.Point(23, 195);
+            this.begin.Name = "begin";
+            this.begin.Size = new System.Drawing.Size(45, 52);
+            this.begin.TabIndex = 29;
+            this.begin.Text = "<<";
+            this.begin.UseVisualStyleBackColor = false;
+            this.begin.Click += new System.EventHandler(this.begin_Click);
             // 
             // textBox2
             // 
@@ -266,10 +271,10 @@
             this.Controls.Add(this.Delete);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.end);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.next);
+            this.Controls.Add(this.begin);
             this.Controls.Add(this.textBox2);
             this.Name = "Таблица_товар";
             this.Style = MetroFramework.MetroColorStyle.Orange;
@@ -289,10 +294,10 @@
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button end;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button next;
+        private System.Windows.Forms.Button begin;
         private System.Windows.Forms.TextBox textBox2;
     }
 }

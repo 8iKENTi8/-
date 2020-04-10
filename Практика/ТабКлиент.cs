@@ -189,10 +189,7 @@ namespace Практика
 
             if (textBox1.Text == "ID-КЛИЕНТА") { MessageBox.Show("Введите ID - КЛИЕНТА"); textBox1.Focus(); return; }
 
-            String idUser = textBox1.Text;
-            String Name = textBox2.Text;
-            String Pasport = textBox3.Text;
-            String Phone = textBox4.Text;
+           
             if (logincheck_c_u())
                 return;
 
@@ -203,20 +200,15 @@ namespace Практика
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
             MySqlCommand command = new MySqlCommand("UPDATE `клиент` SET `ID_C` = @ul, `Имя` = @na, `Паспорт` = @pa, `Телефон` = @ph WHERE `клиент`.`ID_C` = @ul ", db.GetConnection());
-            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = idUser;
-            command.Parameters.Add("@na", MySqlDbType.VarChar).Value = Name;
-            command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = Pasport;
-            command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = Phone;
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+            command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox3.Text;
+            command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = textBox4.Text;
 
-            
-            
-                db.openConnection();
+            db.openConnection();
                 if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был изменен"); }
 
-                db.closeConnection();
-            
-
-           
+                db.closeConnection(); 
         }
 
         //Проверка на символы
