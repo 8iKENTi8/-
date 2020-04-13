@@ -26,7 +26,7 @@ namespace Практика
             MySqlDataAdapter adapter = new MySqlDataAdapter(com);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "клиент");
-            dataGridView1.DataSource = ds.Tables[0];
+            
 
         }
 
@@ -43,7 +43,7 @@ namespace Практика
 
 
 
-            string row = (ds.Rows.Count ).ToString();
+            string row = (ds.Rows.Count+1 ).ToString();
             int row1 = Convert.ToInt32(row);
             string col = (ds.Columns.Count ).ToString();
             int col1 = Convert.ToInt32(col);
@@ -56,9 +56,17 @@ namespace Практика
             Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
             Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
             document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
-            for (int i = 0; i < row1; i++)
+
+            document.Tables[1].Cell(1, 1).Range.Text = "ID-КЛИЕНТА";
+            document.Tables[1].Cell(1, 2).Range.Text = "ИМЯ";
+            document.Tables[1].Cell(1, 3).Range.Text = "Паспорт";
+            document.Tables[1].Cell(1, 4).Range.Text = "Телефон";
+
+            for (int i = 1; i < row1; i++)
                 for (int j = 0; j < col1; j++)
-                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i][j].ToString();
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i-1][j].ToString();
+
+           
             application.Visible = true;
         }
 
@@ -67,6 +75,11 @@ namespace Практика
             this.Hide();
             Main form2 = new Main();
             form2.Show();
+        }
+
+        private void xuiButton3_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

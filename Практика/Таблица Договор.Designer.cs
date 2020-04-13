@@ -34,7 +34,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.end = new System.Windows.Forms.Button();
@@ -69,12 +68,13 @@
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button9.ForeColor = System.Drawing.Color.Black;
-            this.button9.Location = new System.Drawing.Point(497, 287);
+            this.button9.Location = new System.Drawing.Point(538, 195);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(173, 52);
             this.button9.TabIndex = 40;
             this.button9.Text = "Поиск";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
@@ -87,9 +87,9 @@
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button8.ForeColor = System.Drawing.Color.Black;
-            this.button8.Location = new System.Drawing.Point(282, 366);
+            this.button8.Location = new System.Drawing.Point(828, 287);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(131, 52);
+            this.button8.Size = new System.Drawing.Size(170, 52);
             this.button8.TabIndex = 39;
             this.button8.Text = "Назад";
             this.button8.UseVisualStyleBackColor = false;
@@ -122,24 +122,6 @@
             this.textBox1.Size = new System.Drawing.Size(225, 45);
             this.textBox1.TabIndex = 36;
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(217)))), ((int)(((byte)(100)))));
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(238)))), ((int)(((byte)(36)))));
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(209)))), ((int)(((byte)(118)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.ForeColor = System.Drawing.Color.Black;
-            this.button7.Location = new System.Drawing.Point(282, 287);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(131, 52);
-            this.button7.TabIndex = 35;
-            this.button7.Text = "Удалить";
-            this.button7.UseVisualStyleBackColor = false;
-            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(217)))), ((int)(((byte)(100)))));
@@ -151,12 +133,13 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("ObelixPro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(23, 366);
+            this.button6.Location = new System.Drawing.Point(282, 287);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(173, 52);
             this.button6.TabIndex = 34;
             this.button6.Text = "Обновить";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -212,6 +195,7 @@
             this.button2.TabIndex = 31;
             this.button2.Text = "<";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // next
             // 
@@ -281,7 +265,7 @@
             // Search
             // 
             this.Search.Font = new System.Drawing.Font("ObelixPro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Search.Location = new System.Drawing.Point(497, 366);
+            this.Search.Location = new System.Drawing.Point(538, 287);
             this.Search.Multiline = true;
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(173, 52);
@@ -311,13 +295,13 @@
             this.xuiSwitch1.SwitchStyle = XanderUI.XUISwitch.Style.Android;
             this.xuiSwitch1.TabIndex = 54;
             this.xuiSwitch1.Text = "xuiSwitch1";
-            this.xuiSwitch1.Click += new System.EventHandler(this.xuiSwitch1_Click);
+          
             // 
             // Таблица_Договор
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 543);
+            this.ClientSize = new System.Drawing.Size(1074, 447);
             this.Controls.Add(this.xuiSwitch1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Search);
@@ -329,7 +313,6 @@
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.end);
@@ -353,7 +336,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button end;

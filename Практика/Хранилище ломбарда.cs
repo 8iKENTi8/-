@@ -19,6 +19,7 @@ namespace Практика
             InitializeComponent();
             textBox5.Text = "ID-ТОВАРА";
             textBox5.ForeColor = Color.Gray;
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace Практика
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
             MySqlCommand com = new MySqlCommand("SELECT * FROM `хранилище ломбарда`", connection);
@@ -39,6 +41,9 @@ namespace Практика
             int a = ds.Rows.Count - 1;
             textBox1.Text = ds.Rows[0 + a][0].ToString();
             textBox2.Text = ds.Rows[0 + a][1].ToString();
+            string i3 = ds.Rows[0+a][0].ToString();
+            int i4 = Convert.ToInt32(i3);
+          
             
         }
 
@@ -220,6 +225,29 @@ namespace Практика
                 textBox5.Text = "ID-ТОВАРА";
                 textBox5.ForeColor = Color.Gray;
             }
+        }
+
+        //Кнопка обновить 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+
+
+
+            DB db = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("UPDATE `хранилище ломбарда` SET `количество` = '5' WHERE `хранилище ломбарда`.`ID_T` = @ul", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+           
+
+            db.openConnection();
+            if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был изменен"); }
+
+            db.closeConnection();
         }
     }
 }
