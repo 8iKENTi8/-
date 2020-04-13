@@ -17,9 +17,21 @@ namespace Практика
         public Хранилище_ломбарда()
         {
             InitializeComponent();
-            textBox5.Text = "ID-ТОВАРА";
-            textBox5.ForeColor = Color.Gray;
-            
+            textBox2.Text = "КОЛИЧЕСТВО";
+            textBox2.ForeColor = Color.Gray;
+
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
+            connection.Open();
+            MySqlCommand com = new MySqlCommand("SELECT * FROM `хранилище ломбарда`", connection);
+            MySql.Data.MySqlClient.MySqlDataAdapter adapter = new MySql.Data.MySqlClient.MySqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            adapter.Fill(ds);
+            int i;
+            for (i = 0; i < ds.Rows.Count; i++)
+            {
+                metroComboBox1.Items.Add(ds.Rows[i][0].ToString());
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -39,11 +51,9 @@ namespace Практика
             DataTable ds = new DataTable();
             adapter.Fill(ds);
             int a = ds.Rows.Count - 1;
-            textBox1.Text = ds.Rows[0 + a][0].ToString();
             textBox2.Text = ds.Rows[0 + a][1].ToString();
-            string i3 = ds.Rows[0+a][0].ToString();
-            int i4 = Convert.ToInt32(i3);
           
+            metroComboBox1.SelectedIndex = ds.Rows.Count-1 ;
             
         }
 
@@ -56,10 +66,9 @@ namespace Практика
             MySqlDataAdapter adapter = new MySqlDataAdapter(com);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
-
-            textBox1.Text = ds.Rows[0][0].ToString();
             textBox2.Text = ds.Rows[0][1].ToString();
-            
+            metroComboBox1.SelectedIndex = 0;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -72,13 +81,14 @@ namespace Практика
             adapter.Fill(ds);
             int i, j;
             string k, k1;
-            k1 = textBox1.Text.ToString();
+            k1 = metroComboBox1.SelectedItem.ToString();
+           
 
             for (i = 0; i < ds.Rows.Count; i++)
             {
                 for (j = 0; j < ds.Columns.Count; j++)
                 {
-                    k = ds.Rows[0 + i][0 + j].ToString();
+                    k = ds.Rows[0 + i][0].ToString();
 
                     if (k1 == k)
                     {
@@ -92,7 +102,7 @@ namespace Практика
                             return;
                         }
 
-                        textBox1.Text = ds.Rows[0 + i - 1][0].ToString();
+                        metroComboBox1.SelectedIndex--;
                         textBox2.Text = ds.Rows[0 + i - 1][1].ToString();
                        
                         return;
@@ -113,13 +123,14 @@ namespace Практика
             adapter.Fill(ds);
             int i, j;
             string k, k1;
-            k1 = textBox1.Text.ToString();
+           
+           k1= metroComboBox1.SelectedItem.ToString();
 
             for (i = 0; i < ds.Rows.Count; i++)
             {
                 for (j = 0; j < ds.Columns.Count; j++)
                 {
-                    k = ds.Rows[0 + i][0 + j].ToString();
+                    k = ds.Rows[0 + i][0].ToString();
 
                     if (k1 == k)
                     {
@@ -138,7 +149,7 @@ namespace Практика
                             return;
                         }
 
-                        textBox1.Text = ds.Rows[0 + i + 1][0].ToString();
+                        metroComboBox1.SelectedIndex++;
                         textBox2.Text = ds.Rows[0 + i + 1][1].ToString();
                         
                         return;
@@ -157,14 +168,11 @@ namespace Практика
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `товар` WHERE `ID_T` = @ul ", db.GetConnection());
-            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox5.Text;
-
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `хранилище ломбарда` WHERE `ID_T` = @ul ", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = metroComboBox1.SelectedItem.ToString();
 
             adapter.SelectCommand = command;
             adapter.Fill(dt);
-
-
 
             if (dt.Rows.Count == 0) { MessageBox.Show("Такого логина нет"); return true; }
             else
@@ -174,7 +182,7 @@ namespace Практика
         //Кнопка поиск
         private void button9_Click(object sender, EventArgs e)
         {
-            if (textBox5.Text == "ID-КЛИЕНТА") { MessageBox.Show("Введите ID - КЛИЕНТА"); textBox1.Focus(); return; }
+            
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
@@ -187,19 +195,18 @@ namespace Практика
 
             int i, j;
             string k, k1;
-            k1 = textBox5.Text.ToString();
+            k1 = metroComboBox1.SelectedItem.ToString();
 
 
             for (i = 0; i < ds.Rows.Count; i++)
             {
                 for (j = 0; j < ds.Columns.Count; j++)
                 {
-                    k = ds.Rows[0 + i][0 + j].ToString();
+                    k = ds.Rows[0 + i][0 ].ToString();
 
                     if (k1 == k)
                     {
 
-                        textBox1.Text = ds.Rows[0 + i][0].ToString();
                         textBox2.Text = ds.Rows[0 + i][1].ToString();
                         
                         return;
@@ -209,30 +216,12 @@ namespace Практика
             }
         }
 
-        private void textBox5_Enter(object sender, EventArgs e)
-        {
-            if (textBox5.Text == "ID-ТОВАРА")
-            {
-                textBox5.Text = "";
-                textBox5.ForeColor = Color.Black;
-            }
-        }
-
-        private void textBox5_Leave(object sender, EventArgs e)
-        {
-            if (textBox5.Text == "")
-            {
-                textBox5.Text = "ID-ТОВАРА";
-                textBox5.ForeColor = Color.Gray;
-            }
-        }
+     
 
         //Кнопка обновить 
         private void button6_Click(object sender, EventArgs e)
         {
-            
-
-
+            if (textBox2.Text == "КОЛИЧЕСТВО") { MessageBox.Show("Введите Количетсво"); textBox2.Focus(); return; }
 
             DB db = new DB();
 
@@ -240,14 +229,45 @@ namespace Практика
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("UPDATE `хранилище ломбарда` SET `количество` = '5' WHERE `хранилище ломбарда`.`ID_T` = @ul", db.GetConnection());
-            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
-           
+            MySqlCommand command = new MySqlCommand("UPDATE `хранилище ломбарда` SET `количество` = @ul1 WHERE `хранилище ломбарда`.`ID_T` = @ul", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = metroComboBox1.SelectedItem.ToString();
+            command.Parameters.Add("@ul1", MySqlDbType.VarChar).Value = textBox2.Text;
+
 
             db.openConnection();
             if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был изменен"); }
 
             db.closeConnection();
         }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "")
+            {
+                textBox2.Text = "КОЛИЧЕСТВО";
+                textBox2.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "КОЛИЧЕСТВО")
+            {
+                textBox2.Text = "";
+                textBox2.ForeColor = Color.Black;
+            }
+        }
     }
+
+        
+    
 }

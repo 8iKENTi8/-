@@ -158,6 +158,7 @@
             this.button5.TabIndex = 33;
             this.button5.Text = "Добавить";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // end
             // 
@@ -295,7 +296,6 @@
             this.xuiSwitch1.SwitchStyle = XanderUI.XUISwitch.Style.Android;
             this.xuiSwitch1.TabIndex = 54;
             this.xuiSwitch1.Text = "xuiSwitch1";
-          
             // 
             // Таблица_Договор
             // 

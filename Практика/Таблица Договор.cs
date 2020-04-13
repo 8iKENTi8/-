@@ -319,7 +319,9 @@ namespace Практика
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+       
+        //Button add
+        private void button5_Click(object sender, EventArgs e)
         {
 
         }
