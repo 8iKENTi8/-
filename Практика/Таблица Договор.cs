@@ -40,15 +40,16 @@ namespace Практика
             if (i=="False")
             {
                 textBox6.ReadOnly = true; textBox7.ReadOnly = true; textBox4.ReadOnly = true; textBox4.Clear(); textBox6.Clear(); textBox7.Clear();
-                xuiSwitch1.SwitchState = XanderUI.XUISwitch.State.On;
+                xuiSwitch1.SwitchState = XanderUI.XUISwitch.State.Off;
             }
             else
             {
                 textBox6.ReadOnly = false; textBox7.ReadOnly = false; textBox4.ReadOnly = false;
-                xuiSwitch1.SwitchState = XanderUI.XUISwitch.State.Off;
+                xuiSwitch1.SwitchState = XanderUI.XUISwitch.State.On;
             }
         }
 
+        //Кнопка обновить без возврата
         private void ch2()
         {
             DB db = new DB();
@@ -56,13 +57,10 @@ namespace Практика
             DataTable table = new DataTable();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
-           
-
+         
             MySqlCommand command = new MySqlCommand("UPDATE `договор` SET  `Процент30` = NULL, `ДеньгиНаРуки` = @na, `Возврат` = 0, `Дата_выкуп_невозм` = NULL , `Дата_процента` = NULL WHERE `договор`.`ID_D` = @ul ", db.GetConnection());
             command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox5.Text;
-          
-
 
             db.openConnection();
             if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был изменен"); }
@@ -70,6 +68,7 @@ namespace Практика
             db.closeConnection();
         }
 
+        //Кнопка обновить с возвратом
         private void ch3()
         {
             DB db = new DB();
@@ -89,6 +88,54 @@ namespace Практика
 
             db.openConnection();
             if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был изменен"); }
+
+            db.closeConnection();
+        }
+
+        //Кнопка добавить без возврата
+        private void ch4()
+        {
+            DB db = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+          
+            MySqlCommand command = new MySqlCommand("INSERT INTO `договор` (`ID_D`, `ID_C`, `ID_T`, `Процент30`, `ДеньгиНаРуки`, `Возврат`, `Дата_выкуп_невозм`, `Дата_процента`) VALUES (@ul, @na, @na1, NULL, @na2,0 , NULL, NULL)", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+            command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@na1", MySqlDbType.VarChar).Value = textBox3.Text;
+            command.Parameters.Add("@na2", MySqlDbType.VarChar).Value = textBox5.Text;
+
+            db.openConnection();
+            if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был добавлен"); }
+
+            db.closeConnection();
+        }
+
+        //Кнопка добавить с возвратом
+        private void ch5()
+        {
+            DB db = new DB();
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+
+            MySqlCommand command = new MySqlCommand("INSERT INTO `договор` (`ID_D`, `ID_C`, `ID_T`, `Процент30`, `ДеньгиНаРуки`, `Возврат`, `Дата_выкуп_невозм`, `Дата_процента`) VALUES (@ul, @na, @na1, @pr2, @na2,1, @pr1, @pr) ", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+            command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
+            command.Parameters.Add("@na1", MySqlDbType.VarChar).Value = textBox3.Text;
+            command.Parameters.Add("@na2", MySqlDbType.VarChar).Value = textBox5.Text;
+            command.Parameters.Add("@pr", MySqlDbType.VarChar).Value = textBox7.Text;
+            command.Parameters.Add("@pr1", MySqlDbType.VarChar).Value = textBox6.Text;
+            command.Parameters.Add("@pr2", MySqlDbType.VarChar).Value = textBox4.Text;
+
+
+            db.openConnection();
+            if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был добавлен"); }
 
             db.closeConnection();
         }
@@ -117,7 +164,6 @@ namespace Практика
             textBox6.Text = ds.Rows[0][6].ToString();
             textBox7.Text = ds.Rows[0][7].ToString();
             string b = ds.Rows[0][5].ToString();
-            
             ch1(b);
         }
 
@@ -139,6 +185,7 @@ namespace Практика
             textBox7.Text = ds.Rows[0+a][7].ToString();
             string b = ds.Rows[0 + a][5].ToString();
             ch1(b);
+           
 
         }
 
@@ -193,10 +240,34 @@ namespace Практика
             }
         }
 
+
+        //Проверить сушествование
+        public Boolean logincheck_c_u()
+        {
+            DB db = new DB();
+
+            DataTable dt = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `договор` WHERE `ID_D` = @ul ", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+
+            adapter.SelectCommand = command;
+            adapter.Fill(dt);
+
+            if (dt.Rows.Count == 0) { MessageBox.Show("Такого логина нет"); return true; }
+            else
+                return false;
+        }
+
         //Button update
         private void button6_Click(object sender, EventArgs e)
         {
-            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.On)
+            if (textBox1.Text == "ID-ДОГОВОРА") { MessageBox.Show("Введите ID-ДОГОВОРА"); textBox1.Focus(); return; }
+            if (logincheck_c_u())
+                return;
+            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.Off)
                 ch2();
             else
                 ch3();
@@ -266,8 +337,6 @@ namespace Практика
             adapter.SelectCommand = command;
             adapter.Fill(dt);
 
-
-
             if (dt.Rows.Count == 0) { MessageBox.Show("Такого логина нет"); return true; }
             else
                 return false;
@@ -319,9 +388,52 @@ namespace Практика
             }
         }
 
-       
+        //Проверка договора
+        public Boolean logincheck_c()
+        {
+            DB db = new DB();
+
+            DataTable dt = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `договор` WHERE `ID_D` = @ul ", db.GetConnection());
+            command.Parameters.Add("@ul", MySqlDbType.VarChar).Value = textBox1.Text;
+
+
+            adapter.SelectCommand = command;
+            adapter.Fill(dt);
+
+            if (dt.Rows.Count > 0) { MessageBox.Show("Такой договор уже есть"); return true; }
+            else
+                return false;
+        }
+
         //Button add
         private void button5_Click(object sender, EventArgs e)
+        {
+            if (logincheck_c())
+                return;
+            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.Off)
+                ch4();
+            else
+                ch5();
+        }
+
+        private void xuiSwitch1_Click(object sender, EventArgs e)
+        {
+            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.On)
+            {
+                textBox4.ReadOnly =false; textBox6.ReadOnly = false; textBox7.ReadOnly = false;
+            }
+            else
+            {
+                textBox4.ReadOnly = true; textBox6.ReadOnly = true; textBox7.ReadOnly = true;
+                textBox4.Clear(); textBox6.Clear(); textBox7.Clear();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -281,6 +281,7 @@
             this.label1.Size = new System.Drawing.Size(138, 30);
             this.label1.TabIndex = 53;
             this.label1.Text = "Возврат";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // xuiSwitch1
             // 
@@ -296,6 +297,7 @@
             this.xuiSwitch1.SwitchStyle = XanderUI.XUISwitch.Style.Android;
             this.xuiSwitch1.TabIndex = 54;
             this.xuiSwitch1.Text = "xuiSwitch1";
+            this.xuiSwitch1.Click += new System.EventHandler(this.xuiSwitch1_Click);
             // 
             // Таблица_Договор
             // 
