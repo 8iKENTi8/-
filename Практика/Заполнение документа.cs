@@ -134,13 +134,22 @@ namespace Практика
             string col = (ds.Columns.Count).ToString();
             int col1 = Convert.ToInt32(col);
 
-            Word.Application application = new Word.Application();
-            Object missing = Type.Missing;
-            application.Documents.Add(ref missing, ref missing, ref missing, ref missing);
-            Word.Document document = application.ActiveDocument;
-            Word.Range range = application.Selection.Range;
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\3.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
             Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
             Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
             document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
 
             document.Tables[1].Cell(1, 1).Range.Text = "Имя";
@@ -158,8 +167,12 @@ namespace Практика
                 for (int j = 0; j < col1; j++)
                     document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i - 1][j].ToString();
 
+            doc.Close();
+            doc = null;
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\3.docx");
 
-            application.Visible = true;
+
+
         }
 
         private void xuiButton2_Click(object sender, EventArgs e)
@@ -184,70 +197,48 @@ namespace Практика
 
         private void xuiButton3_Click(object sender, EventArgs e)
         {
-            Word.Application application = new Word.Application();
+            
 
 
-            Word.Document doc = null;
-
-            object fileName = @"C:\Users\Vladimir\Desktop\1.docx";
-            object falseValue = false;
-            object trueValue = true;
-            Object missing = Type.Missing;
-
-            doc = application.Documents.Open(ref fileName, ref missing, ref trueValue,
-            ref missing, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing);
-
-
-            Microsoft.Office.Interop.Word.Table tbl = application.ActiveDocument.Tables[1];
-
-
-
-
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    tbl.Rows[i + 3].Cells[j + 1].Range.Text = "0";
-                }
-
-
-
-
-
-            }
         }
 
         private void xuiButton4_Click(object sender, EventArgs e)
         {
-            Word.Application application = new Word.Application();
 
-            Object missing = Type.Missing;
-            object fileName = @"C:\Users\Vladimir\Desktop\1.docx";
-            
-            object trueValue = false;
-            application.Documents.Open(ref fileName, ref missing, ref trueValue,
-            ref missing, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing, ref missing, ref missing,
-            ref missing, ref missing, ref missing);
 
-            Word.Document document = application.ActiveDocument;
-            Word.Range range = application.Selection.Range;
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\3.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
             Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
             Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
+
             document.Tables.Add(range, 10, 10, ref behiavor, ref autoFitBehiavor);
-
-            
-
-
+           
             for (int i = 1; i < 10; i++)
-                for (int j = 0; j < 10; j++)
-                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = "0";
+               for (int j = 0; j < 10; j++)
+                   document.Tables[1].Cell(i + 1, j + 1).Range.Text = "0";
 
+            // Закрываем документ
             
-            application.Visible = true;
+            doc.Close();
+            doc = null;
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\3.docx");
+
 
         }
+        
+
     }
-}
+    }
+
