@@ -34,27 +34,35 @@ namespace Практика
         {
             //Добавление клиента
             DB db = new DB();
+            db.openConnection();
             MySqlCommand command = new MySqlCommand("INSERT INTO `клиент` (`ID_C`, `Имя`, `Паспорт`, `Телефон`) VALUES (NULL, @na, @ph, @pa)", db.GetConnection());
             command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox4.Text;
             command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = textBox5.Text;
-            db.openConnection();
-            
+            command.ExecuteNonQuery();
+
+
+
+
 
             //Добавление Товара
             MySqlCommand com = new MySqlCommand("INSERT INTO `товар` (`ID_T`, `Name`, `Категория`) VALUES (NULL, @na, @pa)", db.GetConnection());
             com.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
             com.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox3.Text;
-            
+            com.ExecuteNonQuery();
+
+
 
             //Добавление договора
             MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", db.GetConnection());
+            com2.ExecuteNonQuery();
             MySqlDataAdapter adapter = new MySqlDataAdapter(com2);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
             int a = ds.Rows.Count - 1;
 
             MySqlCommand com3 = new MySqlCommand("SELECT * FROM `товар`", db.GetConnection());
+            com3.ExecuteNonQuery();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(com3);
             DataTable ds1 = new DataTable();
             adapter1.Fill(ds1);
@@ -65,8 +73,10 @@ namespace Практика
             com1.Parameters.Add("@na", MySqlDbType.VarChar).Value = ds.Rows[0 + a][0].ToString();
             com1.Parameters.Add("@na1", MySqlDbType.VarChar).Value = textBox3.Text;
             com1.Parameters.Add("@na2", MySqlDbType.VarChar).Value = textBox7.Text;
-            com1.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString(); ;
-            
+            com1.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString();
+            com1.ExecuteNonQuery();
+
+
             db.closeConnection();
         }
 
@@ -75,27 +85,32 @@ namespace Практика
         {
             //Добавление клиента
             DB db = new DB();
+            db.openConnection();
             MySqlCommand command = new MySqlCommand("INSERT INTO `клиент` (`ID_C`, `Имя`, `Паспорт`, `Телефон`) VALUES (NULL, @na, @ph, @pa)", db.GetConnection());
             command.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox4.Text;
             command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = textBox5.Text;
-            db.openConnection();
-           
+            command.ExecuteNonQuery();
+
 
             //Добавление Товара
             MySqlCommand com = new MySqlCommand("INSERT INTO `товар` (`ID_T`, `Name`, `Категория`) VALUES (NULL, @na, @pa)", db.GetConnection());
             com.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
             com.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox3.Text;
-            
+            com.ExecuteNonQuery();
+
 
             //Добавление договора
             MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", db.GetConnection());
+            com2.ExecuteNonQuery();
             MySqlDataAdapter adapter = new MySqlDataAdapter(com2);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
             int a = ds.Rows.Count - 1;
 
             MySqlCommand com3 = new MySqlCommand("SELECT * FROM `товар`", db.GetConnection());
+            com3.ExecuteNonQuery(); 
+            
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(com3);
             DataTable ds1 = new DataTable();
             adapter1.Fill(ds1);
@@ -109,7 +124,8 @@ namespace Практика
             com1.Parameters.Add("@pr1", MySqlDbType.VarChar).Value = textBox8.Text;
             com1.Parameters.Add("@pr2", MySqlDbType.VarChar).Value = textBox10.Text;
             com1.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString();
-            
+            com1.ExecuteNonQuery();
+
             db.closeConnection();
         }
         private void xuiButton1_Click(object sender, EventArgs e)
@@ -119,16 +135,19 @@ namespace Практика
             else
                 ch5();
 
-            DB db = new DB();
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
-            MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", db.GetConnection());
+            
+            MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`",connection);
+            com2.ExecuteNonQuery();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(com2);
             DataTable ds1 = new DataTable();
             adapter1.Fill(ds1);
             int a1 = ds1.Rows.Count - 1;
             MySqlCommand com = new MySqlCommand("SELECT `клиент`.`Имя`,`клиент`.`Паспорт`,`клиент`.`Телефон`,`товар`.`Name`,`товар`.`Категория` ,`договор`.`Дата_выкуп_невозм`,`договор`.`Дата_процента`,`договор`.`ДеньгиНаРуки`,`договор`.`Процент30` FROM `договор`,`клиент`,`товар` WHERE `клиент`.`ID_C`=`договор`.`ID_C` AND `договор`.`ID_T`=`товар`.`ID_T` AND `клиент`.`ID_C`=@id", connection);
             com.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString();
+            com.ExecuteNonQuery();
+
             MySqlDataAdapter adapter = new MySqlDataAdapter(com);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
@@ -144,7 +163,7 @@ namespace Практика
             // Создаём объект приложения
             Word.Application app = new Word.Application();
             // Путь до шаблона документа
-            string source = @"C:\Users\Vladimir\Desktop\Доукмент.docx";
+            string source = @"C:\Users\Vladimir\Desktop\Выходной документ.docx";
             // Открываем
             doc = app.Documents.Open(source);
             doc.Activate();
@@ -175,7 +194,8 @@ namespace Практика
 
             doc.Close();
             doc = null;
-            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Доукмент.docx");
+            connection.Close();
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Выходной документ.docx");
 
 
 
