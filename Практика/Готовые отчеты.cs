@@ -138,5 +138,58 @@ namespace Практика
             connection.Close();
             System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Клиенты с возвратом.docx");
         }
+
+        private void xuiButton4_Click(object sender, EventArgs e)
+        {
+
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
+            connection.Open();
+
+            MySqlCommand com = new MySqlCommand("SELECT `товар`.`Name`,`товар`.`Категория`,`хранилище ломбарда`.`количество` FROM `хранилище ломбарда`,`товар` WHERE `товар`.`ID_T`=`хранилище ломбарда`.`ID_T` AND `хранилище ломбарда`.`количество`>0", connection);
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            adapter.Fill(ds);
+
+
+
+            string row = (ds.Rows.Count + 1).ToString();
+            int row1 = Convert.ToInt32(row);
+            string col = (ds.Columns.Count).ToString();
+            int col1 = Convert.ToInt32(col);
+
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\Отчёт по количеству товаров.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
+            Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
+            Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
+            document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
+
+            document.Tables[1].Cell(1, 1).Range.Text = "Товар";
+            document.Tables[1].Cell(1, 2).Range.Text = "Категория";
+            document.Tables[1].Cell(1, 3).Range.Text = "Количество";
+
+
+
+            for (int i = 1; i < row1; i++)
+                for (int j = 0; j < col1; j++)
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i - 1][j].ToString();
+
+            doc.Close();
+            doc = null;
+            connection.Close();
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Отчёт по количеству товаров.docx");
+        }
     }
 }

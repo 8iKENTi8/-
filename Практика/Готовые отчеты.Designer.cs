@@ -121,6 +121,7 @@
             this.xuiButton4.TabIndex = 3;
             this.xuiButton4.TextColor = System.Drawing.Color.Black;
             this.xuiButton4.Vertical_Alignment = System.Drawing.StringAlignment.Center;
+            this.xuiButton4.Click += new System.EventHandler(this.xuiButton4_Click);
             // 
             // Готовые_отчеты
             // 
