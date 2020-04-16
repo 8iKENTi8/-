@@ -51,8 +51,6 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.xuiSwitch1 = new XanderUI.XUISwitch();
             this.label1 = new System.Windows.Forms.Label();
-            this.xuiButton3 = new XanderUI.XUIButton();
-            this.xuiButton4 = new XanderUI.XUIButton();
             this.SuspendLayout();
             // 
             // xuiButton1
@@ -287,57 +285,11 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "Возврат";
             // 
-            // xuiButton3
-            // 
-            this.xuiButton3.BackgroundColor = System.Drawing.Color.White;
-            this.xuiButton3.ButtonImage = ((System.Drawing.Image)(resources.GetObject("xuiButton3.ButtonImage")));
-            this.xuiButton3.ButtonStyle = XanderUI.XUIButton.Style.MacOS;
-            this.xuiButton3.ButtonText = "Сформировать";
-            this.xuiButton3.ClickBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(75)))), ((int)(((byte)(80)))));
-            this.xuiButton3.ClickTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(130)))), ((int)(((byte)(140)))));
-            this.xuiButton3.CornerRadius = 5;
-            this.xuiButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.xuiButton3.Horizontal_Alignment = System.Drawing.StringAlignment.Center;
-            this.xuiButton3.HoverBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(80)))), ((int)(((byte)(90)))));
-            this.xuiButton3.HoverTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(215)))));
-            this.xuiButton3.ImagePosition = XanderUI.XUIButton.imgPosition.Left;
-            this.xuiButton3.Location = new System.Drawing.Point(722, 63);
-            this.xuiButton3.Name = "xuiButton3";
-            this.xuiButton3.Size = new System.Drawing.Size(200, 50);
-            this.xuiButton3.TabIndex = 57;
-            this.xuiButton3.TextColor = System.Drawing.Color.Black;
-            this.xuiButton3.Vertical_Alignment = System.Drawing.StringAlignment.Center;
-            this.xuiButton3.Click += new System.EventHandler(this.xuiButton3_Click);
-            // 
-            // xuiButton4
-            // 
-            this.xuiButton4.BackgroundColor = System.Drawing.Color.White;
-            this.xuiButton4.ButtonImage = ((System.Drawing.Image)(resources.GetObject("xuiButton4.ButtonImage")));
-            this.xuiButton4.ButtonStyle = XanderUI.XUIButton.Style.MacOS;
-            this.xuiButton4.ButtonText = "Сформировать";
-            this.xuiButton4.ClickBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(75)))), ((int)(((byte)(80)))));
-            this.xuiButton4.ClickTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(130)))), ((int)(((byte)(140)))));
-            this.xuiButton4.CornerRadius = 5;
-            this.xuiButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.xuiButton4.Horizontal_Alignment = System.Drawing.StringAlignment.Center;
-            this.xuiButton4.HoverBackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(80)))), ((int)(((byte)(90)))));
-            this.xuiButton4.HoverTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(215)))));
-            this.xuiButton4.ImagePosition = XanderUI.XUIButton.imgPosition.Left;
-            this.xuiButton4.Location = new System.Drawing.Point(346, 42);
-            this.xuiButton4.Name = "xuiButton4";
-            this.xuiButton4.Size = new System.Drawing.Size(200, 50);
-            this.xuiButton4.TabIndex = 58;
-            this.xuiButton4.TextColor = System.Drawing.Color.Black;
-            this.xuiButton4.Vertical_Alignment = System.Drawing.StringAlignment.Center;
-            this.xuiButton4.Click += new System.EventHandler(this.xuiButton4_Click);
-            // 
             // Заполнение_документа
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(997, 487);
-            this.Controls.Add(this.xuiButton4);
-            this.Controls.Add(this.xuiButton3);
             this.Controls.Add(this.xuiSwitch1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox10);
@@ -392,7 +344,5 @@
         private System.Windows.Forms.TextBox textBox10;
         private XanderUI.XUISwitch xuiSwitch1;
         private System.Windows.Forms.Label label1;
-        private XanderUI.XUIButton xuiButton3;
-        private XanderUI.XUIButton xuiButton4;
     }
 }

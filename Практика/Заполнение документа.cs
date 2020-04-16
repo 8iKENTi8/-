@@ -20,6 +20,12 @@ namespace Практика
         public Заполнение_документа()
         {
             InitializeComponent();
+            textBox5.MaxLength = 6;
+            textBox4.MaxLength = 9;
+            textBox2.MaxLength = 9;
+            textBox9.MaxLength = 10;
+            textBox8.MaxLength = 10;
+
 
         }
 
@@ -33,13 +39,13 @@ namespace Практика
             command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = textBox5.Text;
             db.openConnection();
-            if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был создан"); }
+            
 
             //Добавление Товара
             MySqlCommand com = new MySqlCommand("INSERT INTO `товар` (`ID_T`, `Name`, `Категория`) VALUES (NULL, @na, @pa)", db.GetConnection());
             com.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
             com.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox3.Text;
-            if (com.ExecuteNonQuery() == 1) { MessageBox.Show("Товар был создан"); }
+            
 
             //Добавление договора
             MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", db.GetConnection());
@@ -60,7 +66,7 @@ namespace Практика
             com1.Parameters.Add("@na1", MySqlDbType.VarChar).Value = textBox3.Text;
             com1.Parameters.Add("@na2", MySqlDbType.VarChar).Value = textBox7.Text;
             com1.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString(); ;
-            if (com1.ExecuteNonQuery() == 1) { MessageBox.Show("Договор был добавлен"); }
+            
             db.closeConnection();
         }
 
@@ -74,13 +80,13 @@ namespace Практика
             command.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox1.Text;
             command.Parameters.Add("@ph", MySqlDbType.VarChar).Value = textBox5.Text;
             db.openConnection();
-            if (command.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был создан"); }
+           
 
             //Добавление Товара
             MySqlCommand com = new MySqlCommand("INSERT INTO `товар` (`ID_T`, `Name`, `Категория`) VALUES (NULL, @na, @pa)", db.GetConnection());
             com.Parameters.Add("@na", MySqlDbType.VarChar).Value = textBox2.Text;
             com.Parameters.Add("@pa", MySqlDbType.VarChar).Value = textBox3.Text;
-            if (com.ExecuteNonQuery() == 1) { MessageBox.Show("Товар был создан"); }
+            
 
             //Добавление договора
             MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", db.GetConnection());
@@ -103,7 +109,7 @@ namespace Практика
             com1.Parameters.Add("@pr1", MySqlDbType.VarChar).Value = textBox8.Text;
             com1.Parameters.Add("@pr2", MySqlDbType.VarChar).Value = textBox10.Text;
             com1.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString();
-            if (com1.ExecuteNonQuery() == 1) { MessageBox.Show("Аккаунт был добавлен"); }
+            
             db.closeConnection();
         }
         private void xuiButton1_Click(object sender, EventArgs e)
@@ -138,7 +144,7 @@ namespace Практика
             // Создаём объект приложения
             Word.Application app = new Word.Application();
             // Путь до шаблона документа
-            string source = @"C:\Users\Vladimir\Desktop\3.docx";
+            string source = @"C:\Users\Vladimir\Desktop\Доукмент.docx";
             // Открываем
             doc = app.Documents.Open(source);
             doc.Activate();
@@ -169,7 +175,7 @@ namespace Практика
 
             doc.Close();
             doc = null;
-            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\3.docx");
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Доукмент.docx");
 
 
 
@@ -195,50 +201,6 @@ namespace Практика
             }
         }
 
-        private void xuiButton3_Click(object sender, EventArgs e)
-        {
-            
-
-
-        }
-
-        private void xuiButton4_Click(object sender, EventArgs e)
-        {
-
-
-            Word.Document doc = null;
-            // Создаём объект приложения
-            Word.Application app = new Word.Application();
-            // Путь до шаблона документа
-            string source = @"C:\Users\Vladimir\Desktop\3.docx";
-            // Открываем
-            doc = app.Documents.Open(source);
-            doc.Activate();
-
-            // Добавляем информацию
-            // wBookmarks содержит все закладки
-            Word.Document document = app.ActiveDocument;
-            Word.Range range = app.Selection.Range;
-            Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
-            Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
-
-
-            document.Tables.Add(range, 10, 10, ref behiavor, ref autoFitBehiavor);
-           
-            for (int i = 1; i < 10; i++)
-               for (int j = 0; j < 10; j++)
-                   document.Tables[1].Cell(i + 1, j + 1).Range.Text = "0";
-
-            // Закрываем документ
-            
-            doc.Close();
-            doc = null;
-            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\3.docx");
-
-
-        }
-        
-
     }
-    }
+ }
 

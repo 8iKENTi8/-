@@ -28,29 +28,42 @@ namespace Практика
             form2.Show();
         }
 
+        //Без возврата
         private void xuiButton2_Click(object sender, EventArgs e)
         {
+
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
+
             MySqlCommand com = new MySqlCommand("SELECT `клиент`.`Имя`,`клиент`.`Паспорт`,`клиент`.`Телефон` FROM `договор`,`клиент` WHERE `клиент`.`ID_C`=`договор`.`ID_C` AND `договор`.`Возврат`=0", connection);
+
             MySqlDataAdapter adapter = new MySqlDataAdapter(com);
             DataTable ds = new DataTable();
             adapter.Fill(ds);
 
 
 
-            string row = (ds.Rows.Count +1).ToString();
+            string row = (ds.Rows.Count + 1).ToString();
             int row1 = Convert.ToInt32(row);
             string col = (ds.Columns.Count).ToString();
             int col1 = Convert.ToInt32(col);
 
-            Word.Application application = new Word.Application();
-            Object missing = Type.Missing;
-            application.Documents.Add(ref missing, ref missing, ref missing, ref missing);
-            Word.Document document = application.ActiveDocument;
-            Word.Range range = application.Selection.Range;
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\Клиенты без возврата.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
             Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
             Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
             document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
 
             document.Tables[1].Cell(1, 1).Range.Text = "Имя";
@@ -58,13 +71,72 @@ namespace Практика
             document.Tables[1].Cell(1, 3).Range.Text = "Телефон";
 
 
+
             for (int i = 1; i < row1; i++)
                 for (int j = 0; j < col1; j++)
-                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i-1][j].ToString();
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i - 1][j].ToString();
+
+            doc.Close();
+            doc = null;
+            connection.Close();
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Клиенты без возврата.docx");
+
+        }
+
+        //С возвратом
+        private void xuiButton3_Click(object sender, EventArgs e)
+        {
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
+            connection.Open();
+
+            MySqlCommand com = new MySqlCommand("SELECT `клиент`.`Имя`,`клиент`.`Паспорт`,`клиент`.`Телефон`, `договор`.`Процент30`, `договор`.`Дата_процента`,`договор`.`Дата_выкуп_невозм` FROM `договор`,`клиент` WHERE `клиент`.`ID_C`=`договор`.`ID_C` AND `договор`.`Возврат`=1", connection);
+           
+            MySqlDataAdapter adapter = new MySqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            adapter.Fill(ds);
 
 
-            application.Visible = true;
 
+            string row = (ds.Rows.Count + 1).ToString();
+            int row1 = Convert.ToInt32(row);
+            string col = (ds.Columns.Count).ToString();
+            int col1 = Convert.ToInt32(col);
+
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\Клиенты с возвратом.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
+            Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
+            Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
+            document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
+
+            document.Tables[1].Cell(1, 1).Range.Text = "Имя";
+            document.Tables[1].Cell(1, 2).Range.Text = "Паспорт";
+            document.Tables[1].Cell(1, 3).Range.Text = "Телефон";
+            document.Tables[1].Cell(1, 4).Range.Text = "Процент";
+            document.Tables[1].Cell(1, 5).Range.Text = "Дата Зачисления процента";
+            document.Tables[1].Cell(1, 6).Range.Text = "Дата с которой выкуп товара запрещен";
+
+
+
+            for (int i = 1; i < row1; i++)
+                for (int j = 0; j < col1; j++)
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i - 1][j].ToString();
+
+            doc.Close();
+            doc = null;
+            connection.Close();
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Клиенты с возвратом.docx");
         }
     }
 }

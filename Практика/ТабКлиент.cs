@@ -28,6 +28,11 @@ namespace Практика
             textBox3.ForeColor = Color.Gray;
             textBox4.ForeColor = Color.Gray;
             textBox5.ForeColor = Color.Gray;
+            textBox1.MaxLength = 3;
+            textBox2.MaxLength = 9;
+            textBox3.MaxLength = 6;
+            textBox4.MaxLength = 11;
+           
 
         }
 

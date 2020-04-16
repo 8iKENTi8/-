@@ -18,11 +18,15 @@ namespace Практика
         public Таблица_Договор()
         {
             InitializeComponent();
-
+            textBox1.MaxLength = 3;
+            textBox2.MaxLength = 3;
+            textBox3.MaxLength = 3;
+            textBox6.MaxLength = 10;
+            textBox7.MaxLength = 10;
             textBox1.Text = "ID-ДОГОВОРА";
             textBox2.Text = "ID-КЛИЕНТА";
             textBox3.Text = "ID-ТОВАРА";
-            textBox4.Text = "ПРРОЦЕНТ 30%";
+            textBox4.Text = "ПРОЦЕНТ 30%";
             textBox5.Text = "ДЕНЬГИ ЗА ВЕШЬ";
             textBox6.Text = "ВЫКУПИТЬ НЕВОЗМОЖНО";
             textBox7.Text = "ДАТА ПРОЦЕНТА";
@@ -433,9 +437,159 @@ namespace Практика
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+     
 
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.Text = "ID-ДОГОВОРА";
+                textBox1.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "ID-ДОГОВОРА")
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "")
+            {
+                textBox2.Text = "ID-КЛИЕНТА";
+                textBox2.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            if (textBox2.Text == "ID-КЛИЕНТА")
+            {
+                textBox2.Text = "";
+                textBox2.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "ID-ТОВАРА")
+            {
+                textBox3.Text = "";
+                textBox3.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox3_Leave(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "")
+            {
+                textBox3.Text = "ID-ТОВАРА";
+                textBox3.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox4_Leave(object sender, EventArgs e)
+        {
+            if (textBox4.Text == "")
+            {
+                textBox4.Text = "ПРОЦЕНТ 30%";
+                textBox4.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox4_Enter(object sender, EventArgs e)
+        {
+            if (textBox4.Text == "ПРОЦЕНТ 30%")
+            {
+                textBox4.Text = "";
+                textBox4.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox6_Leave(object sender, EventArgs e)
+        {
+            if (textBox6.Text == "")
+            {
+                textBox6.Text = "ВЫКУПИТЬ НЕВОЗМОЖНО";
+                textBox6.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox6_Enter(object sender, EventArgs e)
+        {
+            if (textBox6.Text == "ВЫКУПИТЬ НЕВОЗМОЖНО")
+            {
+                textBox6.Text = "";
+                textBox6.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox5_Leave(object sender, EventArgs e)
+        {
+            if (textBox5.Text == "")
+            {
+                textBox5.Text = "ДЕНЬГИ ЗА ВЕШЬ";
+                textBox5.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox5_Enter(object sender, EventArgs e)
+        {
+            if (textBox5.Text == "ДЕНЬГИ ЗА ВЕШЬ")
+            {
+                textBox5.Text = "";
+                textBox5.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox7_Leave(object sender, EventArgs e)
+        {
+            if (textBox7.Text == "")
+            {
+                textBox7.Text = "ДАТА ПРОЦЕНТА";
+                textBox7.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox7_Enter(object sender, EventArgs e)
+        {
+            if (textBox7.Text == "ДАТА ПРОЦЕНТА")
+            {
+                textBox7.Text = "";
+                textBox7.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8) // цифры и клавиша BackSpace
+            {
+                e.Handled = true;
+            }
         }
     }
     
