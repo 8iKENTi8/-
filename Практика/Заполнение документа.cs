@@ -128,17 +128,79 @@ namespace Практика
 
             db.closeConnection();
         }
-        private void xuiButton1_Click(object sender, EventArgs e)
-        {
-            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.Off)
-                ch4();
-            else
-                ch5();
 
+        //Вывод  без возврата
+
+        private void ch6()
+        {
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
             connection.Open();
-            
-            MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`",connection);
+
+            MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", connection);
+            com2.ExecuteNonQuery();
+            MySqlDataAdapter adapter1 = new MySqlDataAdapter(com2);
+            DataTable ds1 = new DataTable();
+            adapter1.Fill(ds1);
+            int a1 = ds1.Rows.Count - 1;
+            MySqlCommand com = new MySqlCommand("SELECT `клиент`.`Имя`,`клиент`.`Паспорт`,`клиент`.`Телефон`,`товар`.`Name`,`товар`.`Категория` ,`договор`.`ДеньгиНаРуки` FROM `договор`,`клиент`,`товар` WHERE `клиент`.`ID_C`=`договор`.`ID_C` AND `договор`.`ID_T`=`товар`.`ID_T` AND `клиент`.`ID_C`=@id", connection);
+            com.Parameters.Add("@id", MySqlDbType.VarChar).Value = ds1.Rows[0 + a1][0].ToString();
+            com.ExecuteNonQuery();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter(com);
+            DataTable ds = new DataTable();
+            adapter.Fill(ds);
+
+
+
+            string row = (ds.Rows.Count + 1).ToString();
+            int row1 = Convert.ToInt32(row);
+            string col = (ds.Columns.Count).ToString();
+            int col1 = Convert.ToInt32(col);
+
+            Word.Document doc = null;
+            // Создаём объект приложения
+            Word.Application app = new Word.Application();
+            // Путь до шаблона документа
+            string source = @"C:\Users\Vladimir\Desktop\Выходной документ.docx";
+            // Открываем
+            doc = app.Documents.Open(source);
+            doc.Activate();
+
+            // Добавляем информацию
+            // wBookmarks содержит все закладки
+            Word.Document document = app.ActiveDocument;
+            Word.Range range = app.Selection.Range;
+            Object behiavor = Word.WdDefaultTableBehavior.wdWord9TableBehavior;
+            Object autoFitBehiavor = Word.WdAutoFitBehavior.wdAutoFitFixed;
+
+            document.Tables.Add(range, row1, col1, ref behiavor, ref autoFitBehiavor);
+
+            document.Tables[1].Cell(1, 1).Range.Text = "Имя";
+            document.Tables[1].Cell(1, 2).Range.Text = "Паспорт";
+            document.Tables[1].Cell(1, 3).Range.Text = "Телефон";
+            document.Tables[1].Cell(1, 4).Range.Text = "Товар";
+            document.Tables[1].Cell(1, 5).Range.Text = "Категория";
+            document.Tables[1].Cell(1, 6).Range.Text = "Деньги за товар";
+          
+
+
+            for (int i = 1; i < row1; i++)
+                for (int j = 0; j < col1; j++)
+                    document.Tables[1].Cell(i + 1, j + 1).Range.Text = ds.Rows[i - 1][j].ToString();
+
+            doc.Close();
+            doc = null;
+            connection.Close();
+            System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Выходной документ.docx");
+        }
+
+        //Вывод  с возвратом
+        private void ch7()
+        {
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3306;username=root;password=root; database=практика");
+            connection.Open();
+
+            MySqlCommand com2 = new MySqlCommand("SELECT * FROM `клиент`", connection);
             com2.ExecuteNonQuery();
             MySqlDataAdapter adapter1 = new MySqlDataAdapter(com2);
             DataTable ds1 = new DataTable();
@@ -196,6 +258,22 @@ namespace Практика
             doc = null;
             connection.Close();
             System.Diagnostics.Process.Start(@"C:\Users\Vladimir\Desktop\Выходной документ.docx");
+        }
+
+        //Сформировать документ
+        private void xuiButton1_Click(object sender, EventArgs e)
+        {
+            if (xuiSwitch1.SwitchState == XanderUI.XUISwitch.State.Off)
+            {
+                ch4(); ch6();
+            }
+            else
+            {
+                ch5(); ch7();
+            }
+                
+
+           
 
 
 
